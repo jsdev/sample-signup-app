@@ -20,15 +20,10 @@ module.exports = function(app){
         person.email        =   receivedData.email;
         person.save(function(err, doc){
             if(err != undefined){
-                if(err.toString().indexOf('duplicate key') >= 0){
-                    console.log("Email Address Already Registered !")
-                    res.redirect('/entryexists');
-                }
-                else{
-                    console.log("Error : " + err);
-                }
-            }else{
-                console.log("Record Inserted Successfully !");
+                res.send(err);
+            }
+            else{
+                res.send(doc);
             }
         });
     });

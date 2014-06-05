@@ -10,6 +10,12 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
         })
         .when('/success',{
             templateUrl: 'js/templates/success.html'
+        })
+        .when('/entryexists',{
+            templateUrl: 'js/templates/entryexists.html'
+        })
+        .when('/error', {
+            templateUrl: 'js/templates/notsaved.html'
         });
 
 }]);
@@ -33,18 +39,20 @@ function SignupFormCtrl($scope, $location, $http, $templateCache){
             headers :   {'Content-Type':'application/x-www-form-urlencoded'},
             cache   :   $templateCache
         }).
-
         success(function(response){
-            console.log("Success");
-            $scope.codeStatus = response.data;
-            console.log($scope.codeStatus);
-            $location.path('/#/success');
+            if(response.err != undefined){
+                if(response.err.toString().indexOf('duplicate key') >= 0){
+                    $location.path('/entryexists');
+                }
+                else{
+                    $location.path('/error');
+                }
+            } else {
+                 $location.path('/success');
+            }
         }).
-
         error(function(response){
-            console.log("Error");
-            $scope.codeStatus = response || "Request Failed";
-            console.log($scope.codeStatus);
+            $location.path('/error');
         });
         return false;
     };
