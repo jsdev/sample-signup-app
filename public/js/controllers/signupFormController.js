@@ -5,19 +5,19 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     $locationProvider.html5Mode(true);
     $routeProvider
         .when('/', {
-            templateUrl: 'js/templates/main.html',
+            templateUrl: 'templates/main.html',
             controller: 'SignupFormCtrl'
         })
         .when('/success',{
-            templateUrl: 'js/templates/success.html',
+            templateUrl: 'templates/success.html',
             controller: 'HomePageCtrl'
         })
         .when('/entryexists',{
-            templateUrl: 'js/templates/entryexists.html',
+            templateUrl: 'templates/entryexists.html',
             controller: 'HomePageCtrl'
         })
         .when('/error', {
-            templateUrl: 'js/templates/notsaved.html'
+            templateUrl: 'templates/notsaved.html'
         })
         .otherwise({ redirectTo: '/' });;
 
