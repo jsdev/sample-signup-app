@@ -3,7 +3,7 @@ var Person = require('./models/Person');
 module.exports = function(app){
 	app.get('/people/listRecords', function(req, res){
 	    console.log("Retrieve all entries");
-    	Person.find(function(err, doc){
+    	Person.find({},{_id:0, __v:0}, function(err, doc){
     		res.send(doc);
     	})
     });
