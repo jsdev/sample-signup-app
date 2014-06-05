@@ -9,14 +9,17 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
             controller: 'SignupFormCtrl'
         })
         .when('/success',{
-            templateUrl: 'js/templates/success.html'
+            templateUrl: 'js/templates/success.html',
+            controller: 'HomePageCtrl'
         })
         .when('/entryexists',{
-            templateUrl: 'js/templates/entryexists.html'
+            templateUrl: 'js/templates/entryexists.html',
+            controller: 'HomePageCtrl'
         })
         .when('/error', {
             templateUrl: 'js/templates/notsaved.html'
-        });
+        })
+        .otherwise({ redirectTo: '/' });;
 
 }]);
 
@@ -57,3 +60,10 @@ function SignupFormCtrl($scope, $location, $http, $templateCache){
         return false;
     };
 }
+
+myApp.controller('HomePageCtrl', function($scope, $location){
+    $scope.goToHomePage = function(){
+        console.log("inside function");
+        $location.path('/');
+    }
+});
